@@ -5,20 +5,20 @@ import Underline from "@tiptap/extension-underline";
 import TextAlign from "@tiptap/extension-text-align";
 import Placeholder from "@tiptap/extension-placeholder";
 import {
-    FaBold,
-    FaItalic,
-    FaUnderline,
-    FaStrikethrough,
-    FaListUl,
-    FaListOl,
-    FaAlignLeft,
-    FaAlignCenter,
-    FaAlignRight,
-    FaAlignJustify,
-    FaUndo,
-    FaRedo,
-} from "react-icons/fa";
+    HiOutlineBold,
+    HiOutlineItalic,
+    HiOutlineUnderline,
+    HiOutlineStrikethrough,
+    HiOutlineListBullet,
+    HiOutlineQueueList,
+    HiOutlineBars3BottomLeft,
+    HiOutlineBars3,
+    HiOutlineBars3BottomRight,
+    HiOutlineArrowUturnLeft,
+    HiOutlineArrowUturnRight,
+} from "react-icons/hi2";
 import { LuHeading1, LuHeading2, LuHeading3 } from "react-icons/lu";
+import { RxTextAlignJustify } from "react-icons/rx";
 
 type RichTextEditorProps = {
     content: string;
@@ -43,15 +43,17 @@ const MenuButton = ({
         onClick={onClick}
         disabled={disabled}
         title={title}
-        className={`p-2 rounded hover:bg-gray-200 transition-colors ${
-            isActive ? "bg-gray-300 text-blue-600" : "text-gray-700"
-        } ${disabled ? "opacity-50 cursor-not-allowed" : "cursor-pointer"}`}
+        className={`p-2 rounded-lg transition-colors ${
+            isActive
+                ? "bg-accent/20 text-accent"
+                : "text-text-secondary hover:text-text-primary hover:bg-surface-glass"
+        } ${disabled ? "opacity-30 cursor-not-allowed" : "cursor-pointer"}`}
     >
         {children}
     </button>
 );
 
-const Divider = () => <div className="w-px h-6 bg-gray-300 mx-1" />;
+const Divider = () => <div className="w-px h-5 bg-border mx-2" />;
 
 export const RichTextEditor = ({ content, onChange }: RichTextEditorProps) => {
     const editor = useEditor({
@@ -87,29 +89,29 @@ export const RichTextEditor = ({ content, onChange }: RichTextEditorProps) => {
     if (!editor) {
         return (
             <div className="flex justify-center items-center py-20">
-                <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900"></div>
+                <div className="w-8 h-8 border-2 border-accent border-t-transparent rounded-full animate-spin"></div>
             </div>
         );
     }
 
     return (
-        <div className="border border-gray-300 rounded-lg overflow-hidden">
+        <div className="rounded-xl overflow-hidden border border-border bg-surface-elevated">
             {/* Toolbar */}
-            <div className="bg-gray-100 border-b border-gray-300 p-2 flex flex-wrap items-center gap-1">
+            <div className="bg-surface-glass border-b border-border p-3 flex flex-wrap items-center gap-1">
                 {/* Undo/Redo */}
                 <MenuButton
                     onClick={() => editor.chain().focus().undo().run()}
                     disabled={!editor.can().undo()}
                     title="Undo"
                 >
-                    <FaUndo />
+                    <HiOutlineArrowUturnLeft className="text-lg" />
                 </MenuButton>
                 <MenuButton
                     onClick={() => editor.chain().focus().redo().run()}
                     disabled={!editor.can().redo()}
                     title="Redo"
                 >
-                    <FaRedo />
+                    <HiOutlineArrowUturnRight className="text-lg" />
                 </MenuButton>
 
                 <Divider />
@@ -120,21 +122,21 @@ export const RichTextEditor = ({ content, onChange }: RichTextEditorProps) => {
                     isActive={editor.isActive("heading", { level: 1 })}
                     title="Heading 1"
                 >
-                    <LuHeading1 />
+                    <LuHeading1 className="text-lg" />
                 </MenuButton>
                 <MenuButton
                     onClick={() => editor.chain().focus().toggleHeading({ level: 2 }).run()}
                     isActive={editor.isActive("heading", { level: 2 })}
                     title="Heading 2"
                 >
-                    <LuHeading2 />
+                    <LuHeading2 className="text-lg" />
                 </MenuButton>
                 <MenuButton
                     onClick={() => editor.chain().focus().toggleHeading({ level: 3 }).run()}
                     isActive={editor.isActive("heading", { level: 3 })}
                     title="Heading 3"
                 >
-                    <LuHeading3 />
+                    <LuHeading3 className="text-lg" />
                 </MenuButton>
 
                 <Divider />
@@ -145,28 +147,28 @@ export const RichTextEditor = ({ content, onChange }: RichTextEditorProps) => {
                     isActive={editor.isActive("bold")}
                     title="Bold"
                 >
-                    <FaBold />
+                    <HiOutlineBold className="text-lg" />
                 </MenuButton>
                 <MenuButton
                     onClick={() => editor.chain().focus().toggleItalic().run()}
                     isActive={editor.isActive("italic")}
                     title="Italic"
                 >
-                    <FaItalic />
+                    <HiOutlineItalic className="text-lg" />
                 </MenuButton>
                 <MenuButton
                     onClick={() => editor.chain().focus().toggleUnderline().run()}
                     isActive={editor.isActive("underline")}
                     title="Underline"
                 >
-                    <FaUnderline />
+                    <HiOutlineUnderline className="text-lg" />
                 </MenuButton>
                 <MenuButton
                     onClick={() => editor.chain().focus().toggleStrike().run()}
                     isActive={editor.isActive("strike")}
                     title="Strikethrough"
                 >
-                    <FaStrikethrough />
+                    <HiOutlineStrikethrough className="text-lg" />
                 </MenuButton>
 
                 <Divider />
@@ -177,14 +179,14 @@ export const RichTextEditor = ({ content, onChange }: RichTextEditorProps) => {
                     isActive={editor.isActive("bulletList")}
                     title="Bullet List"
                 >
-                    <FaListUl />
+                    <HiOutlineListBullet className="text-lg" />
                 </MenuButton>
                 <MenuButton
                     onClick={() => editor.chain().focus().toggleOrderedList().run()}
                     isActive={editor.isActive("orderedList")}
                     title="Numbered List"
                 >
-                    <FaListOl />
+                    <HiOutlineQueueList className="text-lg" />
                 </MenuButton>
 
                 <Divider />
@@ -195,33 +197,33 @@ export const RichTextEditor = ({ content, onChange }: RichTextEditorProps) => {
                     isActive={editor.isActive({ textAlign: "left" })}
                     title="Align Left"
                 >
-                    <FaAlignLeft />
+                    <HiOutlineBars3BottomLeft className="text-lg" />
                 </MenuButton>
                 <MenuButton
                     onClick={() => editor.chain().focus().setTextAlign("center").run()}
                     isActive={editor.isActive({ textAlign: "center" })}
                     title="Align Center"
                 >
-                    <FaAlignCenter />
+                    <HiOutlineBars3 className="text-lg" />
                 </MenuButton>
                 <MenuButton
                     onClick={() => editor.chain().focus().setTextAlign("right").run()}
                     isActive={editor.isActive({ textAlign: "right" })}
                     title="Align Right"
                 >
-                    <FaAlignRight />
+                    <HiOutlineBars3BottomRight className="text-lg" />
                 </MenuButton>
                 <MenuButton
                     onClick={() => editor.chain().focus().setTextAlign("justify").run()}
                     isActive={editor.isActive({ textAlign: "justify" })}
                     title="Justify"
                 >
-                    <FaAlignJustify />
+                    <RxTextAlignJustify className="text-lg" />
                 </MenuButton>
             </div>
 
             {/* Editor Content */}
-            <div className="bg-white">
+            <div className="bg-surface p-2">
                 <EditorContent editor={editor} />
             </div>
         </div>

@@ -20,14 +20,19 @@ function App() {
   }, []);
 
   return (
-    <div className='min-h-screen w-full max-w-4/5 mx-auto flex flex-col'>
+    <div className='min-h-screen w-full flex flex-col bg-base'>
       <Header />
-      <main className="flex-1">
+      <main className="flex-1 relative">
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/review' element={<SourcesReview />} />
           <Route path='/draft' element={<DraftModification />} />
-          <Route path="*" element={<div>404 - Page not found</div>} />
+          <Route path="*" element={
+            <div className="flex flex-col items-center justify-center py-20 text-text-muted">
+              <span className="text-6xl mb-4">404</span>
+              <p className="text-lg">Page not found</p>
+            </div>
+          } />
         </Routes>
       </main>
     </div>
