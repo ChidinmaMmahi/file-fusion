@@ -10,13 +10,19 @@ type PageLayoutProps = {
     buttonLabel: string;
     navigateTo?: "/" | "/review" | "/draft"
     previousPage?: "/" | "/review" | "/draft"
+    onButtonClick?: () => void;
+    classname?: string;
 }
 
-export const PageLayout = ({ title, subtitle, children, notice, buttonLabel, navigateTo, previousPage }: PageLayoutProps) => {
+export const PageLayout = ({ title, subtitle, children, notice, buttonLabel, navigateTo, previousPage, onButtonClick, classname }: PageLayoutProps) => {
     const navigate = useNavigate();
 
-    const handleNavigate = () => {
-        if (navigateTo) navigate(navigateTo)
+    const handleButtonClick = () => {
+        if (onButtonClick) {
+            onButtonClick();
+        } else if (navigateTo) {
+            navigate(navigateTo);
+        }
     }
 
     const handlePreviousPage = () => {
@@ -24,25 +30,32 @@ export const PageLayout = ({ title, subtitle, children, notice, buttonLabel, nav
     }
 
     return (
-        <div className="w-full max-w-lg mx-auto py-12 ">
+        <div className={`w-full max-w-5xl mx-auto py-16 px-6 ${classname}`}>
             {previousPage &&
-                <div className="bg-gray-100 p-2.5 inline-flex rounded-full cursor-pointer mb-10" onClick={handlePreviousPage}>
-                    <IoArrowBack className="text-xl" />
-                </div>
+                <button
+                    onClick={handlePreviousPage}
+                    className="group flex items-center gap-2 mb-12 text-text-secondary hover:text-text-primary transition-colors cursor-pointer"
+                >
+                    <span className="p-2 rounded-lg bg-surface-elevated border border-border group-hover:border-accent/30 transition-colors">
+                        <IoArrowBack className="text-lg" />
+                    </span>
+                    <span className="text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity">Back</span>
+                </button>
             }
-            <div className="space-y-1 mb-7">
-                <h2 className="text-2xl font-medium">{title}</h2>
-                {subtitle && <p className="text-lg">{subtitle}</p>}
+
+            <div className="space-y-3 mb-10">
+                <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold tracking-tight text-text-primary">{title}</h2>
+                {subtitle && <p className="text-sm sm:text-[16px] md:text-lg text-text-secondary leading-relaxed">{subtitle}</p>}
             </div>
             {children}
-            <div className="mt-20">
-                {notice &&
-                    <p className="mb-5 flex items-start justify-center gap-x-2">
-                        <IoInformationCircle className="text-2xl" />
-                        {notice}
-                    </p>
-                }
-                <Button label={buttonLabel} onClick={handleNavigate} extraClassnames="w-full" />
+            {notice &&
+                <div className="mt-2 text-accent-muted  flex items-start justify-center gap-x-3">
+                    <IoInformationCircle className="text-xl text-accent shrink-0 mt-0.5" />
+                    <p className="text-sm text-text-secondary leading-relaxed">{notice}</p>
+                </div>
+            }
+            <div className="flex justify-end mt-8">
+                <Button label={buttonLabel} onClick={handleButtonClick} />
             </div>
         </div>
     )
