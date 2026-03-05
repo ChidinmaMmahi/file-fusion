@@ -43,11 +43,10 @@ const MenuButton = ({
         onClick={onClick}
         disabled={disabled}
         title={title}
-        className={`p-2 rounded-lg transition-colors ${
-            isActive
-                ? "bg-accent/20 text-accent"
-                : "text-text-secondary hover:text-text-primary hover:bg-surface-glass"
-        } ${disabled ? "opacity-30 cursor-not-allowed" : "cursor-pointer"}`}
+        className={`p-2 rounded-lg transition-colors ${isActive
+            ? "bg-accent/20 text-accent"
+            : "text-text-secondary hover:text-text-primary hover:bg-surface-glass"
+            } ${disabled ? "opacity-30 cursor-not-allowed" : "cursor-pointer"}`}
     >
         {children}
     </button>
@@ -95,10 +94,8 @@ export const RichTextEditor = ({ content, onChange }: RichTextEditorProps) => {
     }
 
     return (
-        <div className="rounded-xl overflow-hidden border border-border bg-surface-elevated">
-            {/* Toolbar */}
-            <div className="bg-surface-glass border-b border-border p-3 flex flex-wrap items-center gap-1">
-                {/* Undo/Redo */}
+        <div className="rounded-xl border border-border bg-surface-elevated">
+            <div className="bg-surface-glass border-b border-border p-3 flex flex-wrap items-center gap-1 sticky top-0 z-10 backdrop-blur-2xl rounded-t-2xl">
                 <MenuButton
                     onClick={() => editor.chain().focus().undo().run()}
                     disabled={!editor.can().undo()}
@@ -116,7 +113,6 @@ export const RichTextEditor = ({ content, onChange }: RichTextEditorProps) => {
 
                 <Divider />
 
-                {/* Headings */}
                 <MenuButton
                     onClick={() => editor.chain().focus().toggleHeading({ level: 1 }).run()}
                     isActive={editor.isActive("heading", { level: 1 })}
@@ -141,7 +137,6 @@ export const RichTextEditor = ({ content, onChange }: RichTextEditorProps) => {
 
                 <Divider />
 
-                {/* Text formatting */}
                 <MenuButton
                     onClick={() => editor.chain().focus().toggleBold().run()}
                     isActive={editor.isActive("bold")}
@@ -173,7 +168,6 @@ export const RichTextEditor = ({ content, onChange }: RichTextEditorProps) => {
 
                 <Divider />
 
-                {/* Lists */}
                 <MenuButton
                     onClick={() => editor.chain().focus().toggleBulletList().run()}
                     isActive={editor.isActive("bulletList")}
@@ -191,7 +185,6 @@ export const RichTextEditor = ({ content, onChange }: RichTextEditorProps) => {
 
                 <Divider />
 
-                {/* Text alignment */}
                 <MenuButton
                     onClick={() => editor.chain().focus().setTextAlign("left").run()}
                     isActive={editor.isActive({ textAlign: "left" })}
@@ -222,8 +215,7 @@ export const RichTextEditor = ({ content, onChange }: RichTextEditorProps) => {
                 </MenuButton>
             </div>
 
-            {/* Editor Content */}
-            <div className="bg-surface p-2">
+            <div className="bg-surface p-2 rounded-b-2xl">
                 <EditorContent editor={editor} />
             </div>
         </div>

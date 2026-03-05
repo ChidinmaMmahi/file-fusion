@@ -46,7 +46,9 @@ export const FileUpload = () => {
                     Drop your files here or click to browse
                 </p>
                 <p className="text-xs sm:text-sm text-text-muted mb-6 text-center">PDF, DOCX, TXT, or images up to 200MB</p>
-                <Button label="Select files" variant="secondary" />
+                <div className="pointer-events-none">
+                    <Button label="Select files" variant="secondary" />
+                </div>
 
                 <input
                     id="file-upload"
@@ -62,7 +64,7 @@ export const FileUpload = () => {
                     {files.map((file, idx) => (
                         <div
                             key={idx}
-                            className="group flex items-center justify-between p-4 rounded-xl bg-surface-elevated border border-border hover:border-accent/30 transition-colors"
+                            className="flex items-center justify-between p-4 rounded-xl bg-surface-elevated border border-border hover:border-accent/30 transition-colors"
                         >
                             <div className="flex items-center gap-x-4">
                                 <div className="p-2.5 rounded-lg bg-surface-glass">
@@ -78,7 +80,7 @@ export const FileUpload = () => {
                                     e.stopPropagation();
                                     deleteFileFromApp(file.name);
                                 }}
-                                className="p-2 rounded-lg text-red-700 lg:text-text-muted lg:hover:text-red-400 lg:hover:bg-red-400/10 transition-colors lg:opacity-0 lg:group-hover:opacity-100"
+                                className="p-2 rounded-lg text-red-500 lg:hover:text-red-400 lg:hover:bg-red-400/10 transition-colors cursor-pointer"
                             >
                                 <HiOutlineTrash className="text-lg" />
                             </button>
