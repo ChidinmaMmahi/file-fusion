@@ -27,6 +27,29 @@
   --color-secondary: #16161d;
 }
 
+/* Light theme overrides */
+[data-theme="light"] {
+  --color-base: #f8f6f3;
+  --color-surface: #ffffff;
+  --color-surface-elevated: #f0ede8;
+  --color-surface-glass: rgba(255, 255, 255, 0.8);
+
+  --color-accent: #a0724a;
+  --color-accent-hover: #8b6040;
+  --color-accent-muted: rgba(160, 114, 74, 0.12);
+
+  --color-text-primary: #1a1a1e;
+  --color-text-secondary: #52525b;
+  --color-text-muted: #a1a1aa;
+
+  --color-border: rgba(0, 0, 0, 0.1);
+  --color-border-accent: rgba(160, 114, 74, 0.35);
+
+  --color-primary-100: #52525b;
+  --color-primary-200: #a1a1aa;
+  --color-secondary: #ffffff;
+}
+
 /* Smooth base styling */
 html {
   scroll-behavior: smooth;
@@ -50,6 +73,12 @@ body::before {
     radial-gradient(ellipse 60% 40% at 100% 100%, rgba(139, 92, 246, 0.05), transparent);
   pointer-events: none;
   z-index: -1;
+}
+
+[data-theme="light"] body::before {
+  background:
+    radial-gradient(ellipse 80% 50% at 50% -20%, rgba(160, 114, 74, 0.06), transparent),
+    radial-gradient(ellipse 60% 40% at 100% 100%, rgba(139, 92, 246, 0.03), transparent);
 }
 
 /* Glass card effect */
@@ -77,6 +106,14 @@ body::before {
 
 ::-webkit-scrollbar-thumb:hover {
   background: rgba(255, 255, 255, 0.2);
+}
+
+[data-theme="light"] ::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.15);
+}
+
+[data-theme="light"] ::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.25);
 }
 
 /* Selection styling */

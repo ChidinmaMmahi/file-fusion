@@ -7,7 +7,7 @@ type PageLayoutProps = {
     subtitle?: string;
     children: React.ReactNode;
     notice?: string;
-    buttonLabel: string;
+    buttonLabel?: string;
     navigateTo?: "/" | "/review" | "/draft"
     previousPage?: "/" | "/review" | "/draft"
     onButtonClick?: () => void;
@@ -54,9 +54,9 @@ export const PageLayout = ({ title, subtitle, children, notice, buttonLabel, nav
                     <p className="text-sm text-text-secondary leading-relaxed">{notice}</p>
                 </div>
             }
-            <div className="flex justify-end mt-8">
+            {buttonLabel && <div className="flex justify-end mt-8">
                 <Button label={buttonLabel} onClick={handleButtonClick} />
-            </div>
+            </div>}
         </div>
     )
 }

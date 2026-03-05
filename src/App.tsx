@@ -5,7 +5,7 @@ import { useEffect } from "react";
 import { getAllFilesFromDB } from "../src/lib";
 import { useFileStore } from "../src/store";
 import { DraftModification, Home, SourcesReview } from './pages'
-import { Header } from './components'
+import { Header, MouseGlow } from './components'
 
 function App() {
   const setFiles = useFileStore((state) => state.setFiles);
@@ -21,6 +21,7 @@ function App() {
 
   return (
     <div className='min-h-screen w-full flex flex-col bg-base'>
+      <MouseGlow />
       <Header />
       <main className="flex-1 relative">
         <Routes>

@@ -13,6 +13,7 @@ export const DraftModification = () => {
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
     const [isDownloadModalOpen, setIsDownloadModalOpen] = useState(false);
+    const [retryKey, setRetryKey] = useState(0);
 
     useEffect(() => {
         const compileContent = async () => {
@@ -73,7 +74,7 @@ export const DraftModification = () => {
         };
 
         compileContent();
-    }, [files, note, sourceOrder]);
+    }, [files, note, sourceOrder, retryKey]);
 
     const handleDownloadClick = () => {
         setIsDownloadModalOpen(true);
@@ -84,7 +85,6 @@ export const DraftModification = () => {
             <PageLayout
                 title="Generating Draft"
                 subtitle="Compiling your sources..."
-                buttonLabel="Download"
                 onButtonClick={handleDownloadClick}
                 previousPage="/review"
             >
@@ -97,12 +97,18 @@ export const DraftModification = () => {
     }
 
     if (error) {
+        const handleRetry = () => {
+            setError(null);
+            setIsLoading(true);
+            setRetryKey((k) => k + 1);
+        };
+
         return (
             <PageLayout
                 title="Error"
                 subtitle="Something went wrong"
                 buttonLabel="Try Again"
-                navigateTo="/review"
+                onButtonClick={handleRetry}
                 previousPage="/review"
             >
                 <div className="p-5 rounded-xl bg-red-500/10 border border-red-500/30 text-red-400">

@@ -55,7 +55,7 @@ const SortableFileItem = ({ file }: { file: FileMeta }) => {
     }, [file.name]);
 
     return (
-        <div ref={setNodeRef} style={style} {...attributes} className="group flex items-start gap-x-3">
+        <div ref={setNodeRef} style={style} {...attributes} className="flex items-start gap-x-3">
             <div {...listeners} className="cursor-grab mt-5 p-1 rounded opacity-40 hover:opacity-100 hover:bg-surface-elevated transition-all">
                 <RxDragHandleDots2 className="text-text-white/10 text-lg" />
             </div>
@@ -72,7 +72,7 @@ const SortableFileItem = ({ file }: { file: FileMeta }) => {
                     <div className="flex items-center gap-x-1">
                         <button
                             onClick={() => setOpen(!open)}
-                            className="p-2 rounded-lg text-text-muted hover:text-text-primary hover:bg-surface-glass transition-colors"
+                            className="p-2 rounded-lg text-text-muted hover:text-text-primary hover:bg-surface-glass transition-colors cursor-pointer"
                         >
                             {open ? (
                                 <HiChevronUp className="text-lg" />
@@ -82,7 +82,7 @@ const SortableFileItem = ({ file }: { file: FileMeta }) => {
                         </button>
                         <button
                             onClick={() => deleteFileFromApp(file.name)}
-                            className="p-2 rounded-lg text-text-muted hover:text-red-400 hover:bg-red-400/10 transition-colors opacity-0 group-hover:opacity-100"
+                            className="p-2 rounded-lg text-red-500 lg:hover:text-red-400 hover:bg-red-400/10 transition-colors cursor-pointer"
                         >
                             <HiOutlineTrash className="text-lg" />
                         </button>
@@ -117,7 +117,7 @@ const SortableNoteItem = () => {
     const wordCount = note.trim() ? note.trim().split(/\s+/).length : 0;
 
     return (
-        <div ref={setNodeRef} style={style} {...attributes} className="group flex items-start gap-x-3">
+        <div ref={setNodeRef} style={style} {...attributes} className="flex items-start gap-x-3">
             <div {...listeners} className="cursor-grab mt-5 p-1 rounded opacity-40 hover:opacity-100 hover:bg-surface-elevated transition-all">
                 <RxDragHandleDots2 className="text-text-white/10 text-lg" />
             </div>
@@ -137,7 +137,7 @@ const SortableNoteItem = () => {
                     <div className="flex items-center gap-x-1">
                         <button
                             onClick={() => setOpen(!open)}
-                            className="p-2 rounded-lg text-text-muted hover:text-text-primary hover:bg-accent/20 transition-colors"
+                            className="p-2 rounded-lg text-text-muted hover:text-text-primary transition-colors cursor-pointer"
                         >
                             {open ? (
                                 <HiChevronUp className="text-lg" />
@@ -147,7 +147,7 @@ const SortableNoteItem = () => {
                         </button>
                         <button
                             onClick={() => setNote("")}
-                            className="p-2 rounded-lg text-text-muted hover:text-red-400 hover:bg-red-400/10 transition-colors opacity-0 group-hover:opacity-100"
+                            className="p-2 rounded-lg text-red-500 lg:hover:text-red-400 hover:bg-red-400/10 transition-colors cursor-pointer"
                         >
                             <HiOutlineTrash className="text-lg" />
                         </button>
