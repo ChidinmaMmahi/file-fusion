@@ -12,9 +12,10 @@ type PageLayoutProps = {
     previousPage?: "/" | "/review" | "/draft"
     onButtonClick?: () => void;
     classname?: string;
+    buttonDisabled?: boolean;
 }
 
-export const PageLayout = ({ title, subtitle, children, notice, buttonLabel, navigateTo, previousPage, onButtonClick, classname }: PageLayoutProps) => {
+export const PageLayout = ({ title, subtitle, children, notice, buttonLabel, navigateTo, previousPage, onButtonClick, classname, buttonDisabled }: PageLayoutProps) => {
     const navigate = useNavigate();
 
     const handleButtonClick = () => {
@@ -55,7 +56,7 @@ export const PageLayout = ({ title, subtitle, children, notice, buttonLabel, nav
                 </div>
             }
             {buttonLabel && <div className="flex justify-end mt-8">
-                <Button label={buttonLabel} onClick={handleButtonClick} />
+                <Button label={buttonLabel} onClick={handleButtonClick} disabled={buttonDisabled} />
             </div>}
         </div>
     )

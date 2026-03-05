@@ -123,7 +123,7 @@ export const DraftModification = () => {
             <PageLayout
                 title="Your Draft"
                 subtitle="Review and edit your compiled document"
-                buttonLabel="Download"
+                buttonLabel={htmlContent && "Download"}
                 onButtonClick={handleDownloadClick}
                 previousPage="/review"
             >

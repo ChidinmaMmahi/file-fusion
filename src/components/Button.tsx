@@ -3,10 +3,11 @@ type ButtonProps = {
     extraClassnames?: string
     onClick?: () => void;
     variant?: 'primary' | 'secondary' | 'ghost'
+    disabled?: boolean
 }
 
-export const Button = ({ label, extraClassnames, onClick, variant = 'primary' }: ButtonProps) => {
-    const baseStyles = "relative px-7 py-3.5 rounded-full font-medium text-base cursor-pointer overflow-hidden transition-all duration-300 ease-out"
+export const Button = ({ label, extraClassnames, onClick, variant = 'primary', disabled = false }: ButtonProps) => {
+    const baseStyles = "relative px-7 py-3.5 rounded-full font-medium text-base overflow-hidden transition-all duration-300 ease-out"
 
     const variants = {
         primary: "bg-gradient-to-r from-accent to-accent-hover text-base hover:shadow-lg hover:shadow-accent/20 active:translate-y-0",
@@ -16,8 +17,9 @@ export const Button = ({ label, extraClassnames, onClick, variant = 'primary' }:
 
     return (
         <button
-            className={`${baseStyles} ${variants[variant]} ${extraClassnames}`}
+            className={`${baseStyles} ${variants[variant]} ${disabled ? "opacity-40 cursor-not-allowed" : "cursor-pointer"} ${extraClassnames}`}
             onClick={onClick}
+            disabled={disabled}
         >
             {label}
         </button>

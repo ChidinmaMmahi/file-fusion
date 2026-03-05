@@ -2,8 +2,10 @@ import { HiOutlinePlus } from "react-icons/hi2"
 import { PageLayout } from "../shared"
 import { addFilesToApp } from "../../lib"
 import { SourcesReviewAccordion } from "./SourceReviewAccordion";
+import { useFileStore } from "../../store";
 
 export const SourcesReview = () => {
+    const files = useFileStore((state) => state.files);
 
     const handleFiles = (fileList: FileList | null) => {
         if (!fileList) return;
@@ -18,6 +20,7 @@ export const SourcesReview = () => {
             navigateTo="/draft"
             previousPage="/"
             notice="Sources with errors will be skipped. You can also manually reorder files"
+            buttonDisabled={files.length === 0}
         >
             <section>
                 <div className="flex justify-end items-center mb-8">
