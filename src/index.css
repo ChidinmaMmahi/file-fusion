@@ -50,7 +50,6 @@
   --color-secondary: #ffffff;
 }
 
-/* Smooth base styling */
 html {
   scroll-behavior: smooth;
 }
@@ -58,27 +57,48 @@ html {
 body {
   background: var(--color-base);
   color: var(--color-text-primary);
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-family:
+    "Inter",
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 /* Subtle background pattern */
 body::before {
-  content: '';
+  content: "";
   position: fixed;
   inset: 0;
   background:
-    radial-gradient(ellipse 80% 50% at 50% -20%, rgba(212, 165, 116, 0.08), transparent),
-    radial-gradient(ellipse 60% 40% at 100% 100%, rgba(139, 92, 246, 0.05), transparent);
+    radial-gradient(
+      ellipse 80% 50% at 50% -20%,
+      rgba(212, 165, 116, 0.08),
+      transparent
+    ),
+    radial-gradient(
+      ellipse 60% 40% at 100% 100%,
+      rgba(139, 92, 246, 0.05),
+      transparent
+    );
   pointer-events: none;
   z-index: -1;
 }
 
 [data-theme="light"] body::before {
   background:
-    radial-gradient(ellipse 80% 50% at 50% -20%, rgba(160, 114, 74, 0.06), transparent),
-    radial-gradient(ellipse 60% 40% at 100% 100%, rgba(139, 92, 246, 0.03), transparent);
+    radial-gradient(
+      ellipse 80% 50% at 50% -20%,
+      rgba(160, 114, 74, 0.06),
+      transparent
+    ),
+    radial-gradient(
+      ellipse 60% 40% at 100% 100%,
+      rgba(139, 92, 246, 0.03),
+      transparent
+    );
 }
 
 /* Glass card effect */
@@ -192,7 +212,9 @@ body::before {
 
 /* Focus ring utilities */
 .focus-ring {
-  transition: box-shadow 0.2s ease, border-color 0.2s ease;
+  transition:
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
 }
 
 .focus-ring:focus {
@@ -203,7 +225,8 @@ body::before {
 
 /* Smooth transitions */
 * {
-  transition-property: background-color, border-color, color, opacity, transform;
+  transition-property:
+    background-color, border-color, color, opacity, transform;
   transition-duration: 0.15s;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
